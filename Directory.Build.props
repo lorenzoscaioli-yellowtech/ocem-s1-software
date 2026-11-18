@@ -1,0 +1,10 @@
+<Project>
+  <!-- Build for whichever .NET the machine has: net10.0 with the .NET 10 SDK (MSBuild 18),
+       net8.0 with the .NET 8 SDK (MSBuild 17). Rolling a net8.0 build forward to the .NET 10
+       runtime is not enough: Blazor 10 serves blazor.web.js differently and the page stops
+       being interactive. -->
+  <PropertyGroup>
+    <TargetFramework Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(MSBuildVersion)', '18.0'))">net10.0</TargetFramework>
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
